@@ -5,17 +5,23 @@ import BuildControl from './BuildControl/BuildControl';
 import classes from './BuildControls.module.css';
 
 const controls = [
-  {label: 'Cheese', type: 'cheese'},
-  {label: 'Meat', type: 'Meat'},
-  {label: 'Salad', type: 'salad'},
-  {label: 'Bacon', type: 'bacon'},
+  { label: 'Cheese', type: 'cheese' },
+  { label: 'Meat', type: 'meat' },
+  { label: 'Salad', type: 'salad' },
+  { label: 'Bacon', type: 'bacon' },
 ]
 
 const buildControls = (props) => (
   <div className={classes.BuildControls}>
-  {/* <BuildControl label="Bacon" /> */}
+    <p>Current price: <strong>{props.price.toFixed(2)} $</strong> </p>
     {controls.map(ctrl => (
-      <BuildControl key={ctrl.label} label={ctrl.label} />
+      <BuildControl
+        key={ctrl.label}
+        label={ctrl.label}
+        adding={() => props.addingIngredient(ctrl.type)}
+        removing={() => props.removingIngredient(ctrl.type)}
+        disabled={props.disabled[ctrl.type]}
+      />
     ))}
   </div>
 );
